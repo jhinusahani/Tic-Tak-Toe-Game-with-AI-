@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Wooden Tic-Tac-Toe — Ashish Sahani</title>
+  <meta name="description" content="Handcrafted wooden Tic-Tac-Toe with AI (minimax), polished UX & accessibility — Made by Ashish Sahani">
+  <link rel="stylesheet" href="X&O.css">
+</head>
+<body>
+  <main class="app" id="app">
+    <header class="header">
+      <div class="brand">
+        <div class="logo" aria-hidden>AS</div>
+        <div>
+          <h1>Wooden Tic-Tac-Toe</h1>
+          <p class="subtitle">Handcrafted board • Smooth UX • AI opponent</p>
+        </div>
+      </div>
+
+      <div class="controls" role="region" aria-label="Game controls">
+        <label class="select-label">
+          Mode
+          <select id="mode" aria-label="Choose game mode">
+            <option value="pvp">2 Players</option>
+            <option value="ai-easy">AI — Easy</option>
+            <option value="ai-hard" selected>AI — Hard</option>
+          </select>
+        </label>
+
+        <label class="select-label">
+          First
+          <select id="first" aria-label="Who starts">
+            <option value="human" selected>Human (X)</option>
+            <option value="ai">AI (O)</option>
+          </select>
+        </label>
+
+        <div class="mini-row">
+          <button id="undoBtn" class="btn ghost" title="Undo (U)">Undo</button>
+          <button id="newBtn" class="btn" title="New Round (N)">New Round</button>
+          <button id="resetBtn" class="btn outline" title="Reset Scores (R)">Reset Scores</button>
+        </div>
+      </div>
+    </header>
+
+    <section class="status" aria-live="polite" id="status">
+      <div class="scoreboard">
+        <div class="score card">X Wins: <strong id="scoreX">0</strong></div>
+        <div class="score card">Draws: <strong id="scoreD">0</strong></div>
+        <div class="score card">O Wins: <strong id="scoreO">0</strong></div>
+      </div>
+      <div class="message" id="message">Ready — your move (X)</div>
+    </section>
+
+    <section class="board-wrap">
+      <div class="frame" aria-hidden="true">
+        <div id="board" class="board" role="grid" aria-label="Tic Tac Toe board">
+          <!-- 9 grid cells -->
+          <button class="cell" data-index="0" role="gridcell" aria-label="Cell 1"></button>
+          <button class="cell" data-index="1" role="gridcell" aria-label="Cell 2"></button>
+          <button class="cell" data-index="2" role="gridcell" aria-label="Cell 3"></button>
+          <button class="cell" data-index="3" role="gridcell" aria-label="Cell 4"></button>
+          <button class="cell" data-index="4" role="gridcell" aria-label="Cell 5"></button>
+          <button class="cell" data-index="5" role="gridcell" aria-label="Cell 6"></button>
+          <button class="cell" data-index="6" role="gridcell" aria-label="Cell 7"></button>
+          <button class="cell" data-index="7" role="gridcell" aria-label="Cell 8"></button>
+          <button class="cell" data-index="8" role="gridcell" aria-label="Cell 9"></button>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">
+  <div class="made">Made with ❤️ by <strong>Ashish Sahani</strong></div>
+  <div class="socials">
+    <a href="https://github.com/jhinusahani" 
+       target="_blank" rel="noopener" 
+       aria-label="GitHub Profile" class="social-btn github">
+      <svg viewBox="0 0 24 24"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.1 3.3 9.4 7.9 10.9.6.1.8-.3.8-.6v-2.2c-3.2.7-3.9-1.5-3.9-1.5-.5-1.3-1.1-1.6-1.1-1.6-.9-.6.1-.6.1-.6 1 .1 1.6 1 1.6 1 .9 1.6 2.4 1.1 3 .8.1-.6.3-1.1.6-1.3-2.6-.3-5.3-1.3-5.3-5.8 0-1.3.5-2.3 1.1-3.1-.1-.3-.5-1.5.1-3.1 0 0 .9-.3 3 .1a10.4 10.4 0 0 1 5.4 0c2.1-.4 3-.1 3-.1.6 1.6.2 2.8.1 3.1.7.8 1.1 1.8 1.1 3.1 0 4.5-2.7 5.5-5.3 5.8.4.3.7.9.7 1.8v2.7c0 .3.2.7.8.6A11.6 11.6 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z"/></svg>
+    </a>
+    <a href="https://www.linkedin.com/in/ashish-sahani-761432380/" 
+       target="_blank" rel="noopener" 
+       aria-label="LinkedIn Profile" class="social-btn linkedin">
+      <svg viewBox="0 0 24 24"><path d="M19 0h-14a5 5 0 0 0-5 5v14a5 5 0 0 0 5 5h14a5 5 0 0 0 5-5v-14a5 5 0 0 0-5-5Zm-11.5 20h-3v-11h3v11Zm-1.5-12.3a1.7 1.7 0 1 1 0-3.4 1.7 1.7 0 0 1 0 3.4Zm13 12.3h-3v-5.6c0-1.3 0-3-1.9-3s-2.2 1.5-2.2 3v5.6h-3v-11h2.9v1.5h.1c.4-.8 1.4-1.5 2.9-1.5 3.1 0 3.6 2 3.6 4.7v6.3Z"/></svg>
+    </a>
+    <a href="YOUR_RESUME_LINK.pdf" 
+       target="_blank" rel="noopener" 
+       aria-label="Resume PDF" class="social-btn resume">
+      <svg viewBox="0 0 24 24"><path d="M6 2a2 2 0 0 0-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8l-6-6H6Zm7 7V3.5L18.5 9H13Z"/></svg>
+    </a>
+  </div>
+</footer>
+
+
+    
+    <!-- result overlay -->
+    <div id="overlay" class="overlay hidden" role="dialog" aria-modal="true" aria-hidden="true">
+      <div class="overlay-card" role="document">
+        <h2 id="overlayTitle">Result</h2>
+        <p id="overlayText" class="muted">Nice move!</p>
+        <div class="overlay-actions">
+          <button id="overlayNew" class="btn">New Round</button>
+          <button id="overlayReset" class="btn ghost">Reset Scores</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- confetti canvas -->
+    <canvas id="confetti" class="confetti" aria-hidden="true"></canvas>
+  </main>
+
+  <script src="X&O.js" defer></script>
+</body>
+</html>
